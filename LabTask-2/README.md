@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Express.js Accessories Website
 
 This is an Express.js application with EJS templating for Honey, I'm home Accessories.
@@ -53,7 +52,3 @@ Lab Task-2/
 - ✅ Mobile menu toggle
 - ✅ Product showcase
 - ✅ Newsletter subscription form
-=======
-# WEB-Project
-E-Commerence Website
->>>>>>> 235c51f19d137e279f9d6ed5973cd5c84ac166a4
