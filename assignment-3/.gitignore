@@ -1,0 +1,19 @@
+<<<<<<< HEAD
+node_modules
+.env
+=======
+# Dependencies — never upload these (too large, auto-installed)
+node_modules/
+
+# Environment variables — contains secrets (JWT secret, DB passwords)
+.env
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+>>>>>>> 235c51f19d137e279f9d6ed5973cd5c84ac166a4
