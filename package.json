@@ -1,0 +1,23 @@
+{
+  "name": "honey-im-home-accessories",
+  "version": "1.0.0",
+  "description": "Express.js website for Honey, I'm home Accessories",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "express",
+    "ejs",
+    "accessories",
+    "ecommerce"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^9.6.2"
+  }
+}
