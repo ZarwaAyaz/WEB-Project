@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile – Honey, I'm home Accessories</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .profile-page {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: #faf8f5;
+        }
+        .profile-card {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 48px 40px;
+            width: 100%;
+            max-width: 460px;
+            text-align: center;
+        }
+        .profile-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #e4b3d9;
+            color: #fff;
+            font-size: 30px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .profile-card h2 { font-size: 22px; font-weight: 500; color: #333; margin-bottom: 6px; }
+        .profile-card .role-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+        .role-admin  { background: #f0e6f6; color: #7b3fa0; }
+        .role-customer { background: #fde8f5; color: #c084a8; }
+        .profile-info { text-align: left; margin-bottom: 28px; }
+        .profile-info p { font-size: 14px; color: #666; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+        .profile-info p span { font-weight: 600; color: #333; }
+        .btn-logout {
+            display: inline-block;
+            padding: 12px 36px;
+            background: #333;
+            color: #fff;
+            border: 2px solid #333;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .btn-logout:hover { background: transparent; color: #333; }
+    </style>
+</head>
+<body>
+
+    <%- include('../header') %>
+
+    <div class="profile-page">
+        <div class="profile-card">
+
+            <!-- Avatar: first letter of name -->
+            <div class="profile-avatar"><%= currentUser.name.charAt(0).toUpperCase() %></div>
+
+            <h2><%= currentUser.name %></h2>
+            <span class="role-badge <%= currentUser.role === 'admin' ? 'role-admin' : 'role-customer' %>">
+                <%= currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1) %>
+            </span>
+
+            <div class="profile-info">
+                <p>Name: <span><%= currentUser.name %></span></p>
+                <p>Email: <span><%= currentUser.email %></span></p>
+                <p>Account type: <span><%= currentUser.role %></span></p>
+            </div>
+
+            <% if (currentUser.role === 'admin') { %>
+                <a href="/admin" class="btn-logout" style="margin-right:12px; background:#c084a8; border-color:#c084a8;">Admin Panel</a>
+            <% } %>
+            <a href="/logout" class="btn-logout">Logout</a>
+
+        </div>
+    </div>
+
+    <%- include('../footer') %>
+
+</body>
+</html>

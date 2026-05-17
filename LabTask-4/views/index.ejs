@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Honey, I'm home Accessories.</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('header') %>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-overlay">
+                <button class="shop-all-btn">Shop all</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bestsellers Section -->
+    <section class="bestsellers-section">
+        <h2 class="section-title">BESTSELLERS!</h2>
+
+        <% if (bestSellers.length > 0) { %>
+        <div class="product-grid">
+            <% bestSellers.forEach(product => { %>
+            <div class="product-card">
+                <a href="/products/<%= product._id %>" style="text-decoration:none; color:inherit;">
+                    <div class="product-image">
+                        <% if (product.stock === 0) { %><span class="badge sold-out">Sold out</span><% } %>
+                        <% if (product.image) { %>
+                            <% if (product.hoverImage) { %>
+                                <img src="<%= product.image %>" alt="<%= product.name %>" class="img-default">
+                                <img src="<%= product.hoverImage %>" alt="<%= product.name %>" class="img-hover">
+                            <% } else { %>
+                                <img src="<%= product.image %>" alt="<%= product.name %>">
+                            <% } %>
+                        <% } else { %>
+                            <div class="product-placeholder-text"><%= product.category.charAt(0) %></div>
+                        <% } %>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"><%= product.name %></h3>
+                        <div class="product-price">
+                            <span class="sale-price">Rs.<%= product.price.toLocaleString() %>.00 PKR</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="product-info" style="padding-top:0;">
+                    <% if (product.stock > 0) { %>
+                        <% const qtyInCart = cartMap[product._id.toString()] || 0; %>
+                        <% if (qtyInCart > 0) { %>
+                            <div class="cart-qty-control">
+                                <form action="/cart/decrease/<%= product._id %>" method="POST" style="display:inline;">
+                                    <input type="hidden" name="redirectTo" value="/">
+                                    <button type="submit" class="qty-btn">&minus;</button>
+                                </form>
+                                <span class="qty-display"><%= qtyInCart %></span>
+                                <% if (qtyInCart < product.stock) { %>
+                                    <form action="/cart/add/<%= product._id %>" method="POST" style="display:inline;">
+                                        <input type="hidden" name="redirectTo" value="/">
+                                        <button type="submit" class="qty-btn">+</button>
+                                    </form>
+                                <% } else { %>
+                                    <button class="qty-btn" disabled title="Max stock reached">+</button>
+                                <% } %>
+                            </div>
+                        <% } else { %>
+                            <form action="/cart/add/<%= product._id %>" method="POST" style="margin:0;">
+                                <input type="hidden" name="redirectTo" value="/">
+                                <button type="submit" class="btn-outline">Add to cart</button>
+                            </form>
+                        <% } %>
+                    <% } else { %>
+                        <button class="btn-outline" disabled>Sold Out</button>
+                    <% } %>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <% } else { %>
+        <p style="text-align:center; color:#999; padding:20px 0;">No bestsellers to show yet.</p>
+        <% } %>
+
+        <div class="view-all-container">
+            <a href="/best-selling" class="btn-dark view-all-link">View all</a>
+        </div>
+    </section>
+
+    <!-- New Products Section -->
+    <section class="new-products-section">
+        <h2 class="section-title">NEW PRODUCTS!</h2>
+
+        <% if (newArrivals.length > 0) { %>
+        <div class="product-grid">
+            <% newArrivals.forEach(product => { %>
+            <div class="product-card">
+                <a href="/products/<%= product._id %>" style="text-decoration:none; color:inherit;">
+                    <div class="product-image">
+                        <% if (product.stock === 0) { %><span class="badge sold-out">Sold out</span><% } %>
+                        <% if (product.image) { %>
+                            <% if (product.hoverImage) { %>
+                                <img src="<%= product.image %>" alt="<%= product.name %>" class="img-default">
+                                <img src="<%= product.hoverImage %>" alt="<%= product.name %>" class="img-hover">
+                            <% } else { %>
+                                <img src="<%= product.image %>" alt="<%= product.name %>">
+                            <% } %>
+                        <% } else { %>
+                            <div class="product-placeholder-text"><%= product.category.charAt(0) %></div>
+                        <% } %>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name"><%= product.name %></h3>
+                        <div class="product-price">
+                            <span class="sale-price">Rs.<%= product.price.toLocaleString() %>.00 PKR</span>
+                        </div>
+                    </div>
+                </a>
+                <div class="product-info" style="padding-top:0;">
+                    <% if (product.stock > 0) { %>
+                        <% const qtyInCart = cartMap[product._id.toString()] || 0; %>
+                        <% if (qtyInCart > 0) { %>
+                            <div class="cart-qty-control">
+                                <form action="/cart/decrease/<%= product._id %>" method="POST" style="display:inline;">
+                                    <input type="hidden" name="redirectTo" value="/">
+                                    <button type="submit" class="qty-btn">&minus;</button>
+                                </form>
+                                <span class="qty-display"><%= qtyInCart %></span>
+                                <% if (qtyInCart < product.stock) { %>
+                                    <form action="/cart/add/<%= product._id %>" method="POST" style="display:inline;">
+                                        <input type="hidden" name="redirectTo" value="/">
+                                        <button type="submit" class="qty-btn">+</button>
+                                    </form>
+                                <% } else { %>
+                                    <button class="qty-btn" disabled title="Max stock reached">+</button>
+                                <% } %>
+                            </div>
+                        <% } else { %>
+                            <form action="/cart/add/<%= product._id %>" method="POST" style="margin:0;">
+                                <input type="hidden" name="redirectTo" value="/">
+                                <button type="submit" class="btn-outline">Add to cart</button>
+                            </form>
+                        <% } %>
+                    <% } else { %>
+                        <button class="btn-outline" disabled>Sold Out</button>
+                    <% } %>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <% } else { %>
+        <p style="text-align:center; color:#999; padding:20px 0;">No new arrivals to show yet.</p>
+        <% } %>
+
+        <div class="view-all-container">
+            <a href="/new-arrivals" class="btn-dark view-all-link">View all</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-container">
+            <h2 class="about-title">ABOUT US!</h2>
+            <p class="about-text">
+                Honey, I'm Home Accessories is built on the belief that luxury should feel effortless. We create timeless, beautifully crafted accessories that elevate everyday moments but without the hefty price tag. Each piece is made with high-quality, sustainable stainless steel, giving you lasting durability, confidence, and style you can rely on day after day.
+            </p>
+        </div>
+    </section>
+
+    <%- include('footer') %>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

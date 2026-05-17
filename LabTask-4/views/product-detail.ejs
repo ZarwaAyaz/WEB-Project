@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= product.name %> – Honey, I'm home Accessories.</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('header') %>
+
+    <section class="page-header">
+        <h2 class="page-title"><%= product.name %></h2>
+        <p class="page-subtitle"><a href="/products" style="color:#c084a8;">← Back to All Products</a></p>
+    </section>
+
+    <div class="detail-container">
+
+        <!-- Product Image -->
+        <div class="detail-image">
+            <% if (product.image) { %>
+                <img src="<%= product.image %>" alt="<%= product.name %>">
+            <% } else { %>
+                <div class="detail-placeholder"><%= product.category.charAt(0) %></div>
+            <% } %>
+        </div>
+
+        <!-- Product Info -->
+        <div class="detail-info">
+            <span class="product-category-tag"><%= product.category %></span>
+            <h1 class="detail-name"><%= product.name %></h1>
+
+            <!-- Star Rating -->
+            <div class="product-rating">
+                <% for (let i = 1; i <= 5; i++) { %>
+                    <span class="<%= i <= Math.round(product.rating) ? 'star filled' : 'star' %>">★</span>
+                <% } %>
+                <span class="rating-num">(<%= product.rating %>)</span>
+            </div>
+
+            <!-- Price -->
+            <div class="detail-price">Rs. <%= product.price.toLocaleString() %>.00 PKR</div>
+
+            <!-- Description -->
+            <% if (product.description) { %>
+                <p class="detail-description"><%= product.description %></p>
+            <% } %>
+
+            <!-- Stock -->
+            <div class="product-stock" style="margin-bottom:20px;">
+                <% if (product.stock === 0) { %>
+                    <span class="out-of-stock">Out of Stock</span>
+                <% } else { %>
+                    <span class="in-stock">In Stock (<%= product.stock %> available)</span>
+                <% } %>
+            </div>
+
+            <!-- Add to Cart Form -->
+            <% if (product.stock > 0) { %>
+                <form action="/cart/add/<%= product._id %>" method="POST">
+                    <input type="hidden" name="redirectTo" value="/products/<%= product._id %>">
+                    <button type="submit" class="btn-dark">Add to Cart</button>
+                </form>
+            <% } else { %>
+                <button class="btn-dark" disabled style="opacity:0.5;cursor:not-allowed;">Sold Out</button>
+            <% } %>
+
+            <a href="/cart" class="btn-outline" style="display:inline-block; margin-top:12px;">View Cart</a>
+        </div>
+
+    </div>
+
+    <%- include('footer') %>
+    <script src="/js/script.js"></script>
+</body>
+</html>
