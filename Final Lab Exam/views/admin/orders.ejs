@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders – Admin Panel</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <style>
+        .orders-table { width: 100%; border-collapse: collapse; }
+        .orders-table th, .orders-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        .orders-table th { background: #f8f4f0; font-weight: 600; color: #555; }
+        .orders-table tbody tr:hover { background: #fdf9f6; }
+        .order-items-list { margin: 0; padding: 0; list-style: none; }
+        .order-items-list li { font-size: 0.82rem; color: #555; }
+        .no-orders { text-align: center; padding: 40px; color: #aaa; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-wrapper">
+
+        <!-- ===== Admin Sidebar ===== -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>🛍️</span>
+                <span>Admin Panel</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="/admin" class="nav-item">📋 Dashboard</a>
+                <a href="/admin/products/add" class="nav-item">➕ Add Product</a>
+                <a href="/admin/orders" class="nav-item active">📦 Orders</a>
+                <a href="/" class="nav-item" target="_blank">🌐 View Store</a>
+                <a href="/logout" class="nav-item logout">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <!-- ===== Main Content ===== -->
+        <main class="admin-content">
+
+            <div class="admin-header">
+                <h1>Customer Orders</h1>
+                <span style="color:#888; font-size:0.9rem;"><%= orders.length %> order<%= orders.length !== 1 ? 's' : '' %> total</span>
+            </div>
+
+            <% if (success && success.length > 0) { %>
+                <div class="alert-success"><%= success[0] %></div>
+            <% } %>
+            <% if (error && error.length > 0) { %>
+                <div class="alert-error"><%= error[0] %></div>
+            <% } %>
+
+            <div class="table-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Items</th>
+                            <th>Total (Rs.)</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (orders.length === 0) { %>
+                            <tr>
+                                <td colspan="7" class="no-orders">
+                                    No orders placed yet. Once customers check out, orders will appear here.
+                                </td>
+                            </tr>
+                        <% } else { %>
+                            <% orders.forEach((order, index) => { %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td style="font-family: monospace; font-size: 0.78rem; color: #888;">
+                                        <%= order._id.toString().slice(-8).toUpperCase() %>
+                                    </td>
+                                    <td>
+                                        <% if (order.user) { %>
+                                            <strong><%= order.customerName || order.user.name || 'Unknown' %></strong><br>
+                                            <small style="color:#888;"><%= order.user.email || '' %></small>
+                                        <% } else { %>
+                                            <strong><%= order.customerName || 'Unknown' %></strong><br>
+                                            <span style="color:#ccc; font-size:0.82rem;">Deleted user</span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <ul class="order-items-list">
+                                            <% order.items.forEach(item => { %>
+                                                <li>× <%= item.quantity %> &nbsp;<%= item.name %> &nbsp;<span style="color:#b89a6a;">Rs. <%= item.price %></span></li>
+                                            <% }) %>
+                                        </ul>
+                                    </td>
+                                    <td><strong>Rs. <%= order.totalAmount.toLocaleString() %></strong></td>
+                                    <td style="font-size:0.88rem;">
+                                        <%= order.phone || '—' %>
+                                    </td>
+                                    <td style="font-size:0.85rem; max-width:180px;">
+                                        <% if (order.address) { %>
+                                            <%= order.address %>
+                                        <% } else { %>
+                                            <span style="color:#ccc;">—</span>
+                                        <% } %>
+                                    </td>
+                                    <td style="font-size:0.82rem; color:#888;">
+                                        <%= new Date(order.createdAt).toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' }) %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>

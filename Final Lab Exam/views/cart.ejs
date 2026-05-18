@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart – Honey, I'm home Accessories.</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('header') %>
+
+    <section class="page-header">
+        <h2 class="page-title">Your Cart</h2>
+        <p class="page-subtitle"><%= cart.length %> item<%= cart.length !== 1 ? 's' : '' %> in your cart</p>
+    </section>
+
+    <div class="cart-container">
+
+        <% if (cart.length === 0) { %>
+            <!-- Empty cart message -->
+            <div class="cart-empty">
+                <p>Your cart is empty.</p>
+                <a href="/products" class="btn-dark">Browse Products</a>
+            </div>
+
+        <% } else { %>
+
+            <!-- Cart Items Table -->
+            <div class="cart-table-wrap">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cart.forEach(item => { %>
+                            <tr>
+                                <!-- Product image + name -->
+                                <td class="cart-product-cell">
+                                    <% if (item.image) { %>
+                                        <img src="<%= item.image %>" alt="<%= item.name %>" class="cart-thumb">
+                                    <% } else { %>
+                                        <div class="cart-thumb-placeholder"><%= item.name.charAt(0) %></div>
+                                    <% } %>
+                                    <span><%= item.name %></span>
+                                </td>
+
+                                <!-- Unit price -->
+                                <td>Rs. <%= item.price.toLocaleString() %></td>
+
+                                <!-- Quantity -->
+                                <td><%= item.quantity %></td>
+
+                                <!-- Subtotal -->
+                                <td>Rs. <%= (item.price * item.quantity).toLocaleString() %></td>
+
+                                <!-- Remove button -->
+                                <td>
+                                    <form action="/cart/remove/<%= item.productId %>" method="POST">
+                                        <button type="submit" class="cart-remove-btn">✕ Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Grand Total + Checkout -->
+            <div class="cart-summary">
+                <div class="cart-total">
+                    Grand Total: <strong>Rs. <%= grandTotal.toLocaleString() %>.00 PKR</strong>
+                </div>
+                <div class="cart-actions">
+                    <a href="/products" class="btn-outline">Continue Shopping</a>
+                    <a href="/checkout" class="btn-dark">Proceed to Checkout →</a>
+                </div>
+            </div>
+
+        <% } %>
+    </div>
+
+    <%- include('footer') %>
+    <script src="/js/script.js"></script>
+</body>
+</html>

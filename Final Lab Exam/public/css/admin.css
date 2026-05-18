@@ -1,0 +1,547 @@
+/* ================================================
+   ADMIN PANEL STYLES  –  Honey, I'm home Accessories
+   ================================================ */
+
+/* ---- Reset & Base ---- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f6fa;
+    color: #333;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================================================
+   LAYOUT: Sidebar + Main Content
+   ================================================ */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ---- Sidebar ---- */
+.sidebar {
+    width: 230px;
+    background: #2c2c3e;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+    flex: 1;
+}
+
+.nav-item {
+    display: block;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    transition: background 0.2s, color 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border-left-color: #c084a8;
+}
+
+.nav-item.active {
+    background: rgba(192, 132, 168, 0.2);
+    color: #fff;
+    border-left-color: #c084a8;
+    font-weight: 600;
+}
+
+.nav-item.logout {
+    margin-top: auto;
+    color: #ff8a80;
+}
+
+.nav-item.logout:hover {
+    background: rgba(255, 80, 80, 0.15);
+    color: #ff5252;
+    border-left-color: #ff5252;
+}
+
+/* ---- Main Content Area ---- */
+.admin-content {
+    flex: 1;
+    padding: 30px;
+    overflow-x: auto;
+}
+
+/* ================================================
+   PAGE HEADER
+   ================================================ */
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.admin-header h1 {
+    font-size: 24px;
+    color: #2c2c3e;
+}
+
+/* ================================================
+   ALERTS / MESSAGES
+   ================================================ */
+.alert-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background: #fde8e8;
+    color: #c0392b;
+    border: 1px solid #f5b7b1;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* ================================================
+   STATS CARDS
+   ================================================ */
+.stats-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 130px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #c084a8;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ================================================
+   PRODUCTS TABLE
+   ================================================ */
+.table-container {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    overflow: auto;
+}
+
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.products-table thead {
+    background: #2c2c3e;
+    color: #fff;
+}
+
+.products-table thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.products-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.15s;
+}
+
+.products-table tbody tr:hover {
+    background: #faf8fc;
+}
+
+.products-table tbody td {
+    padding: 12px 16px;
+    vertical-align: middle;
+}
+
+/* Table Image Thumbnail */
+.table-img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #eee;
+}
+
+.table-img-placeholder {
+    width: 56px;
+    height: 56px;
+    border-radius: 6px;
+    background: #e4b3d9;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.product-name-cell {
+    font-weight: 600;
+    max-width: 200px;
+}
+
+.price-cell {
+    font-weight: 600;
+    color: #2c2c3e;
+}
+
+/* Category Badge */
+.category-badge {
+    background: #f0e6f6;
+    color: #7b3fa0;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Stock Badges */
+.badge-in-stock {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-sold-out {
+    background: #fde8e8;
+    color: #c0392b;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Action Buttons */
+.actions-cell {
+    white-space: nowrap;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-edit {
+    background: #2196f3;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+    display: inline-block;
+}
+
+.btn-edit:hover {
+    background: #1769aa;
+    color: #fff;
+}
+
+.btn-delete {
+    background: #e53935;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-delete:hover {
+    background: #b71c1c;
+}
+
+/* ================================================
+   BUTTONS (Header Level)
+   ================================================ */
+.btn-add {
+    background: #c084a8;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+    display: inline-block;
+}
+
+.btn-add:hover {
+    background: #a0689b;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background 0.2s;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+/* ================================================
+   PRODUCT FORM CARD
+   ================================================ */
+.form-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    max-width: 700px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 6px;
+}
+
+.required {
+    color: #e53935;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #c084a8;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Two columns side by side */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-hint {
+    color: #888;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+.no-image-text {
+    color: #aaa;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* Current image preview (in edit form) */
+.current-image-preview {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.current-image-preview img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.current-image-preview small {
+    color: #888;
+    font-size: 12px;
+}
+
+/* Form Action Buttons */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.btn-submit {
+    background: #c084a8;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-submit:hover {
+    background: #a0689b;
+}
+
+.btn-cancel {
+    background: transparent;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: background 0.2s;
+    display: inline-block;
+}
+
+.btn-cancel:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+/* Featured sections checkboxes */
+.checkbox-group {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #444;
+    cursor: pointer;
+    user-select: none;
+}
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #b07ab0;
+    cursor: pointer;
+}
+   ================================================ */
+@media (max-width: 768px) {
+    .admin-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 8px;
+    }
+
+    .nav-item {
+        padding: 8px 12px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    .nav-item.active, .nav-item:hover {
+        border-left: none;
+        border-bottom-color: #c084a8;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-content {
+        padding: 16px;
+    }
+}
